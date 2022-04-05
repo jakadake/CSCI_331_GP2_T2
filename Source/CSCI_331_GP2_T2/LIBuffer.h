@@ -49,6 +49,10 @@ public:
 	*/
 	string getBuffer() { return buf; };
 
+	bool writeIndex(ofstream&, vector<primaryIndex>);
+
+	bool readIndex(ifstream&, vector<primaryIndex>&);
+
 
 
 

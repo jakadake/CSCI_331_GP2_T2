@@ -38,7 +38,37 @@ bool LIBuffer::read(ifstream& inFile) {
 	}
 	else
 		return false;
+}
 
+bool LIBuffer::writeIndex(ofstream& oFile, vector<primaryIndex> index){
+	if (oFile.is_open()) {
+		for (int i = 0; i < index.size(); i++) {
+			oFile << index[i].getZip() << ',' << index[i].getOffset() << '\n';
+		}
+		return true;
+	}
+	else
+		return false;
+}
+
+bool LIbuffer::readIndex(ifstream& iFile, vector<primaryIndex>& index){
+	string in;
+	string zip;
+	string offset;
+	int iterator = 0;
+	while(iFile.is_open() && !iFile.eof()){
+		getline(iFile, in);
+		int j = 0;
+		while(in[j] != ','){
+			zip[j] = in[j];
+		}
+		j++;
+		while(in[j] != '\n'){
+			offset[j] = in[j];
+		}
+		index[iterator].add(stoi(zip), stoi(offset));
+		iterator++;
+	}
 }
 
 bool LIBuffer::write(ofstream& outFile, zip record) {

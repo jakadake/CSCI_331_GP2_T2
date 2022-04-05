@@ -28,7 +28,6 @@ Header Record Architecture:
 -file structure type
 -version of your file structure type (we may add features in subsequent versions)
 -header record size
--number of bytes for each record size integer (if fixed-size)
 -size format type {ASCII or binary}
 -index file name
 -index file schema information {how to read the index file format}
@@ -67,7 +66,9 @@ short mostWest(vector<zip>); // searches a given state to find the most western 
 
 void cleanup(vector<vector<zip>>&); // deallocates memory reserved during runtime
 
-void transfer(ofstream& oFile, vector<vector<zip>>, vector<primaryIndex>& index);
+void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>>, vector<primaryIndex>& index);
+
+void buildHeader(ofstream& oFileD, ifstream& inFile);
 
 class primaryIndex;
 struct indexElement;
@@ -80,13 +81,13 @@ const string manual =
 
 int main(int argc, string args[]) {
 	
-	ofstream outFile1, outFile2;
+	ofstream outFileD, outFileI;
 	ifstream inFile;	// filestream objects
 	string filename;
 	int queryZip;
 
 	if (argc == 1 || argc == 2) {
-		cout << manual;
+		cout << "Invalid Input" << endl << manual;
 		return -1;
 	}
 
@@ -98,12 +99,18 @@ int main(int argc, string args[]) {
 
 		printTable(states);
 
-		outFile1.open("DataFile.licsv");
-		outFile2.open("IndexFile.index");
+		outFileD.open("DataFile.licsv");
+		outFileI.open("IndexFile.index");
 
 	}
 	else if (args[1] == "-z") {
 		queryZip = stoi(args[2]);
+
+		/**
+		call search program here
+		*/
+
+
 	}
 	else {
 	cout << "invalid arguments"
@@ -129,14 +136,71 @@ int main(int argc, string args[]) {
 	cout << "Hello World" << endl;
 
 	outFile.close();
+	outFileD.close(); 
+	outFileI.close();
 	inFile.close();
 	return 1;
 }
 
-void transfer(ofstream& oFile,vector<vector<zip>> states, vector<primaryIndex>& index){
+void buildHeader(ofstream& oFileD, ifstream& inFile){
+	string header, temp, record;
+	int count = 0;
+	record.append("Structure Type: Lengh Indexed Comma Separated File\n");
+	record.append("Version: 1.0\n");
+
+	//obtain the header
+	for (int i = 0; i < 3; i++) {
+		getline(inFile, temp);
+		header.append(temp);
+	}
+	//Determine size of record
+	record.append("Record Size: ");
+	record.append(header.size());
+	record.push_back('\n');
+
+	//Size format type
+	record.append("Size Format: 2-digit ASCII\n");
+
+	//Index File Name
+	record.append("Index File: IndexFile.index\n");
+
+	//Index File Schema Information
+	record.append("Index File Schema: Listed by zip code then corresponding offset, sorted by zip code\n");
+
+	//Record Count
+	record.append("Record Count: 40936\n");
+
+	//Count of fields per record 
+	for(int j = 0; j < header.size(); j++){
+		if(header[j] == ',' ){
+			count++;
+		}
+	}
+	if (!header.is_empty())
+		count++;
+	record.append("Fields per Record: ");
+	record.append(count);
+	record.push_back('\n');
+
+
+
+	/*
+	header.append("Data File : ");
+	header.append("DataFile.licsv");
+	header.append("\nColumn Headers In the Data File: \n");
+	for (int i = 0; i < 3; i++) {
+		getline(inFile, temp);
+		header.append(temp);
+	}
+	header.append("\n");
+	*/
+}
+
+void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>> states, vector<primaryIndex>& index){
 	string temp, data;
 	LIBuffer buffer;
 	int count = 0, offsetSum = 0;
+
 	for(int i = 0; i < numStates; i++){
 		for(int j = 0; j < states[i][j].size()){
 			temp = states[i][j].getNum();
@@ -154,12 +218,15 @@ void transfer(ofstream& oFile,vector<vector<zip>> states, vector<primaryIndex>& 
 			data = itos(count);
 			data.append(temp);
 			buffer.pack(data);
-			buffer.write(oFile);
+			buffer.write(oFileD);
 			offsetSum += buffer.size();
 			index.add(temp.getNum(), offsetSum);
 		}
 	}
+	buffer.writeIndex(oFileI, index);
+
 }
+
 
 /**
 @brief Read in data from the csv, place on buffer,
