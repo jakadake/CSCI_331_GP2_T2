@@ -30,7 +30,7 @@ public:
 	@brief reads from csv file and places on string
 	@post returns the string of one line of us_postal_codes.csv
 	*/
-	bool read(ifstream& inFile);
+	bool read(ifstream& inFile, int offset);
 
 	bool write(ofstream& outFile);
 
@@ -49,9 +49,6 @@ public:
 	*/
 	string getBuffer() { return buf; };
 
-	bool writeIndex(ofstream&, vector<primaryIndex>);
-
-	bool readIndex(ifstream&, vector<primaryIndex>&);
 
 
 

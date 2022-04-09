@@ -6,9 +6,9 @@ Main program
 
 /**
 project objectives
-1. process with a buffer and convert the given CSV files into a length-indicated, comma-seperated format with a header record
-2. extend read and unpack methods for length-indicated records
-3. use a buffer to read and write the header record
+*1. process with a buffer and convert the given CSV files into a length-indicated, comma-seperated format with a header record
+*2. extend read and unpack methods for length-indicated records
+*3. use a buffer to read and write the header record
 4. output tables as in GP1 from both csv files
 5. create in ram, then write to a file, an index of the zip records file.
 6. load an index file into memory, and search for a particular zip record, then print it to the console from the data file
@@ -66,18 +66,18 @@ short mostWest(vector<zip>); // searches a given state to find the most western 
 
 void cleanup(vector<vector<zip>>&); // deallocates memory reserved during runtime
 
-void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>>, vector<primaryIndex>& index);
+void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>>, primaryIndex& index);
 
 void buildHeader(ofstream& oFileD, ifstream& inFile);
-
-class primaryIndex;
-struct indexElement;
 
 const string manual =
 "sample input: programname -r filename.csv\noptions: \n-r <filename.csv>\n-z <zip code> ";
 
 
-
+/*
+* @brief main function that takes command line arguments
+* @param argument count, string of arguments
+*/
 
 int main(int argc, string args[]) {
 	
@@ -85,53 +85,39 @@ int main(int argc, string args[]) {
 	ifstream inFile;	// filestream objects
 	string filename;
 	int queryZip;
+	primaryIndex indexList;
 
-	if (argc == 1 || argc == 2) {
+	if (argc != 3) {
 		cout << "Invalid Input" << endl << manual;
 		return -1;
 	}
 
-	if (args[1] == "-r") {
+	if (args[1] == "-r") {	// read file into memory
 		filename = args[2];
 		inFile.open(filename); // access the data file and associate to filestream object
 		vector<vector<zip>> states; // array of state vectors
-		readIn(inFile, states);
+		readIn(inFile, states);  // same as readIn from project 1
 
 		printTable(states);
 
 		outFileD.open("DataFile.licsv");
 		outFileI.open("IndexFile.index");
 
+		transfer(outFileD, outFileI, states, indexList);
+
 	}
-	else if (args[1] == "-z") {
+	else if (args[1] == "-z") {	// search for zip
+
 		queryZip = stoi(args[2]);
-
-		/**
-		call search program here
-		*/
-
-
+		indexList.search(queryZip);
 	}
-	else {
-	cout << "invalid arguments"
+	else {	// invalid arguments 
+
+		cout << "invalid arguments";
 		return -2;
-	}	// invalid arguments
 	
-	
-	
-	/*
-	outFile.open("output.txt");
-	
-	string header, temp;
-	header.append("Data File : ");
-	header.append(filename);
-	header.append("\nColumn Headers In the Data File: \n");
-	for (int i = 0; i < 3; i++) {
-		getline(inFile, temp);
-		header.append(temp);
 	}
-	header.append("\n");
-	*/
+	
 
 	cout << "Hello World" << endl;
 
@@ -141,6 +127,13 @@ int main(int argc, string args[]) {
 	inFile.close();
 	return 1;
 }
+
+/*
+@brief Builds the header architecture. 
+@pre Receives a a data file and the input file. 
+@param1 oFileD an ofstream variable which contains the address of the length-indicated file.  
+@param2 oFileI an ofstream variable which contains the address of the index file.
+*/
 
 void buildHeader(ofstream& oFileD, ifstream& inFile){
 	string header, temp, record;
@@ -153,6 +146,7 @@ void buildHeader(ofstream& oFileD, ifstream& inFile){
 		getline(inFile, temp);
 		header.append(temp);
 	}
+
 	//Determine size of record
 	record.append("Record Size: ");
 	record.append(header.size());
@@ -168,7 +162,7 @@ void buildHeader(ofstream& oFileD, ifstream& inFile){
 	record.append("Index File Schema: Listed by zip code then corresponding offset, sorted by zip code\n");
 
 	//Record Count
-	record.append("Record Count: 40936\n");
+	record.append("Record Count: 40933\n");
 
 	//Count of fields per record 
 	for(int j = 0; j < header.size(); j++){
@@ -182,27 +176,39 @@ void buildHeader(ofstream& oFileD, ifstream& inFile){
 	record.append(count);
 	record.push_back('\n');
 
+	//Name of each field
+	record.append("Name of Fields: ");
+	record.append(header);
+	record.push_back('\n');
 
+	//Type Schema
+	//record.append("Type Schema:")
 
-	/*
-	header.append("Data File : ");
-	header.append("DataFile.licsv");
-	header.append("\nColumn Headers In the Data File: \n");
-	for (int i = 0; i < 3; i++) {
-		getline(inFile, temp);
-		header.append(temp);
-	}
-	header.append("\n");
-	*/
+	//Indicate which field is primary key
+	record.append("First Key: Zip Code");
+	record.append(temp);
+	record.push_back('\n');
+
+	//Send Header Architecture to the file
+	oFileD << record;
+
 }
 
-void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>> states, vector<primaryIndex>& index){
+/*
+@brief Sends data from vector of vectors to length-indicated file.
+@pre Takes in the length-indicated data file, the index file, the vector of vectors, and the list of indices. 
+@param1 oFileD an ofstream variable which contains the address of the length-indicated file.  
+@param2 oFileI an ofstream variable which contains the address of the index file.
+@param3 states a vector<vector<zip>> which contains all of records from the given csv.
+@param4 indexList a primaryIndex class reference which stores the indices
+*/
+void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>> states, primaryIndex& indexList) {
 	string temp, data;
 	LIBuffer buffer;
 	int count = 0, offsetSum = 0;
 
-	for(int i = 0; i < numStates; i++){
-		for(int j = 0; j < states[i][j].size()){
+	for(int i = 0; i < numStates; i++) {
+		for(int j = 0; j < states[i][j].size()) {
 			temp = states[i][j].getNum();
 			temp.append(itos(states[i][j].getCity()));
 			temp.push_back(',');
@@ -213,14 +219,13 @@ void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>> states, ve
 			temp.append(ftos(states[i][j].getLat()));
 			temp.push_back(',');
 			temp.append(ftos(states[i][j].getLon()));
-			temp.push_back('\n');
-			count = temp.size() + 2;
+			count = temp.size();
 			data = itos(count);
 			data.append(temp);
 			buffer.pack(data);
 			buffer.write(oFileD);
-			offsetSum += buffer.size();
-			index.add(temp.getNum(), offsetSum);
+			offsetSum += buffer.size() + 2;
+			indexList.add(temp.getNum(), offsetSum);
 		}
 	}
 	buffer.writeIndex(oFileI, index);
@@ -241,10 +246,29 @@ void readIn(ifstream& inFile, vector<vector<zip>>& states) {
 	zip temp; // temporary storage for parsed record
 	string item; // stores one field at a time before it's added to temp
 	string headerData;
+	vector<string> headerElement;
 	int offsetSum;
-
 	delimBuffer b; // create buffer object
 
+	for (int i = 0; i < 3; ++i) {
+		b.read(inFile);
+		headerData.append(b.getBuffer());
+
+	}
+	
+	// places each element of the entire header onto seperate elements of a vector
+	for (int i = 0, j = 0; i < headerData.size(), ++i) {
+		while (headerData[i] != ',') {
+			if (headerData[i] != '\"' && headerData[i] != '\n') {
+				headerElement[j].tolower();
+				headerElement[j].push_back(headerData[i]);
+			}
+			i++;
+		}
+		i++;
+		j++;
+		headerElement.tolower();
+	}
 	int tag = 0;
 
 	while (b.read(inFile)) { // loop until end of file
@@ -252,9 +276,27 @@ void readIn(ifstream& inFile, vector<vector<zip>>& states) {
 
 		while (b.unpack(item)) {
 
-			//cout << "Unpack " << item << endl;
+			if (headerElement[tag] == "zipcode") {
+				temp.setNum(stoi(item));	//If it is a zip code
+			}
+			else if (headerElement[tag] == "placename") {
+				temp.setCity(item);			//If it is a city
+			}
+			else if (headerElement[tag] == "state") {
+				temp.setStateCode(item);	//If it is a state code
+			}
+			else if (headerElement[tag] == "county") {
+				temp.setCounty(item);		//if it is a county
+			}
+			else if (headerElement[tag] == "lat") {
+				temp.setLat(stof(item));	//If it is a latitude
+			}
+			else if (headerElement[tag] == "long") {
+				temp.setLon(stof(item));	//If it is a longitude
+			}
+			++tag;
 
-			switch (tag) {
+			/*switch (headerElement[tag]) {
 			case 0: temp.setNum(stoi(item));	//If it is a zip code
 				break;
 			case 1: temp.setCity(item);			//If it is a city
@@ -269,7 +311,7 @@ void readIn(ifstream& inFile, vector<vector<zip>>& states) {
 				tag = -1; break;
 			}
 			item = ""; //ittemm
-			++tag;
+			*/
 		}
 		states[stateChooser(temp.getStateCode())].push_back(zip(temp));
 		// new zip object with same values as temp is added to the end of the corresponding state vector

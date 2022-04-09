@@ -26,12 +26,12 @@ delimBuffer::delimBuffer(char delim = ',', int maxsize = 1000) {
 }
 
 //Read from delimBuffer
-bool delimBuffer::read(ifstream& inFile){
+bool delimBuffer::read(ifstream& inFile) {
 	index = 0;
 	buf = "";
 	if (inFile.is_open() && !inFile.eof()) {				// execute only when the file is open and not at the end of the file
 		getline(inFile,buf);								// pull everything up to the next newline
-		size = stoi(buf[0]) * 10 + stoi(buf[1]);			// first two chars of string are length indicators
+		size = buf.size();
 		return true;
 	}
 	else
@@ -45,7 +45,7 @@ bool delimBuffer::write(ofstream& outFile) {
 
 }
 
-bool delimBuffer::unpack(string& field){
+bool delimBuffer::unpack(string& field) {
 	if (index != size && size != 0) { // execute only when delimBuffer is not empty
 
 		while (index < size && buf[index] != delim) { // 

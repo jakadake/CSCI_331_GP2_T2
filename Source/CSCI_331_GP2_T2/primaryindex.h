@@ -5,6 +5,9 @@
 */
 
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
 
 
 struct indexElement {
@@ -23,15 +26,21 @@ struct indexElement {
 
 class primaryIndex {
 public:
-	primaryIndex();
+	primaryIndex() { recCount = 0; }
 
-	void add(int, int);
+	primaryIndex(ofstream& oFile) { readFromFile(oFile); }
+
+	void add(int z, int o);
 
 	int search(int target, int l, int r);
 
 	int getZip() { return index.zip; }
 
 	int getOffset() { return index.offset; }
+
+	void writeToFile(ofstream& oFile);
+
+	void readFromFile(ifstream& iFile);
 
 private:
 

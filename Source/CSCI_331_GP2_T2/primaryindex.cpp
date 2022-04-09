@@ -5,6 +5,10 @@
 */
 
 #include "primaryindex.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
 
 /*
 * @brief
@@ -27,7 +31,7 @@ void primaryIndex::add(int z, int o) {
 * @param target value, left-most index, right-most index
 */
 
-int primaryIndex::search(int target, int l, int r = index.size()) {
+int primaryIndex::search(int target, int l = 0, int r = index.size()) {
 	if (r >= l)
 		int mid = l + (r-1) / 2;
 	if (index[mid].getZip() == target)
@@ -39,3 +43,34 @@ int primaryIndex::search(int target, int l, int r = index.size()) {
 	return -1;
 
 }
+
+void primaryIndex::writeToFile( ofstream& oFile){
+	
+	oFile << recCount << "\n";
+
+	for (int i = 0; i < index.size(); i++) {
+		oFile << index[i].zip << "," << index[i].offset << "\n";
+	}
+}
+
+
+void primaryIndex::readFromFile(ifstream& iFile) {
+	if (!iFile.eof()) {
+		iFile >> recCount;
+
+		string temp;
+		int z, o;
+		char temp;
+
+		while (!iFile.eof()) {
+			temp = "";
+			temp = iFile.getline();
+			
+			iFile >> z >> temp >> o;
+
+			index.add(z, o);
+
+		}
+	}
+}
+
