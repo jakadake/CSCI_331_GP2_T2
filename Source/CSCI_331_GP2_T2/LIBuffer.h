@@ -30,9 +30,9 @@ public:
 	@brief reads from csv file and places on string
 	@post returns the string of one line of us_postal_codes.csv
 	*/
-	bool read(ifstream& inFile, int offset);
+	bool read(fstream& inFile, unsigned long offset);
 
-	bool write(ofstream& outFile);
+	void write(fstream& outFile);
 
 	/**
 	@brief Seperates each field from the line on the LIBuffer
@@ -41,24 +41,24 @@ public:
 	*/
 	bool unpack(string& field);
 
-	bool pack(string& field);
+	void pack(string& field);
 
 	/**
 	@brief Gives the LIBuffer string
 	@post Returns the LIBuffer string
 	*/
-	string getBuffer() { return buf; };
+	string getBuffer() { return buf; }
+	
 
-
-
+	int getSize() { return buf.size(); }
 
 
 private:
-	char delim;
+
 	int size;
+	char delim;
 	int maxsize;
 	int index;
 	string buf;
-
 };
 #endif

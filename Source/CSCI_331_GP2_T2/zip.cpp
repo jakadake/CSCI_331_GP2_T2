@@ -33,12 +33,12 @@ zip::zip(int newNum, string newCity, string newStateCode, string newCounty, floa
 }
 
 // copy constructor
-zip::zip(zip* oldZip) 
+zip::zip(const zip& oldZip) 
 {
-	num = oldZip->getNum();
-	city = oldZip->getCity();
-	stateCode = oldZip->getStateCode();
-	county = oldZip->getCounty();
-	lat = oldZip->getLat();
-	lon = oldZip->getLon();
+	num = oldZip.num;
+	city = oldZip.city;
+	stateCode = oldZip.stateCode;
+	county = oldZip.county;
+	lat = oldZip.lat;
+	lon = oldZip.lon;
 }

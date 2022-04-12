@@ -9,7 +9,7 @@ project objectives
 *1. process with a buffer and convert the given CSV files into a length-indicated, comma-seperated format with a header record
 *2. extend read and unpack methods for length-indicated records
 *3. use a buffer to read and write the header record
-4. output tables as in GP1 from both csv files
+*4. output tables as in GP1 from both csv files
 5. create in ram, then write to a file, an index of the zip records file.
 6. load an index file into memory, and search for a particular zip record, then print it to the console from the data file
 	- use a header record for the index file
@@ -45,33 +45,13 @@ Header Record Architecture:
 #include "LIBuffer.h"
 #include "zip.h"
 #include <vector>
+#include <iostream>
 using namespace std;
 
-static const short numStates = 57; // number of possible states/regions
 
-
-string printTable(vector<vector<zip>>); // output data table
-
-void readIn(ifstream& inFile, vector<vector<zip>>&); // read and parse data
-
-short stateChooser(string x);	// return index of state with given 2 letter code
-
-short mostNorth(vector<zip>); // searches a given state to find the most northern zipcode
-
-short mostSouth(vector<zip>); // searches a given state to find the most southern zipcode
-
-short mostEast(vector<zip>); // searches a given state to find the most eastern zipcode //moost steeast
-
-short mostWest(vector<zip>); // searches a given state to find the most western zipcode
-
-void cleanup(vector<vector<zip>>&); // deallocates memory reserved during runtime
-
-void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>>, primaryIndex& index);
-
-void buildHeader(ofstream& oFileD, ifstream& inFile);
 
 const string manual =
-"sample input: programname -r filename.csv\noptions: \n-r <filename.csv>\n-z <zip code> ";
+"sample input: programname -r filename.csv\noptions: \n-r <filename.csv>\n-z <zip code> \nprogram must be run once with a csv file to generate the datafile and index";
 
 
 /*
@@ -79,419 +59,151 @@ const string manual =
 * @param argument count, string of arguments
 */
 
-int main(int argc, string args[]) {
+int main(int argc, char* argv[]) {
 	
-	ofstream outFileD, outFileI;
+	fstream iFile, dFile;
 	ifstream inFile;	// filestream objects
 	string filename;
 	int queryZip;
-	primaryIndex indexList;
+	unsigned long offset = 0;
+	LIBuffer indicated;
+	string arg1, arg2;
+
+	for (int i = 0; i < argc; i++) {
+		cout << argv[i] << ' ';
+	}
 
 	if (argc != 3) {
 		cout << "Invalid Input" << endl << manual;
 		return -1;
 	}
 
-	if (args[1] == "-r") {	// read file into memory
-		filename = args[2];
+	arg1 = argv[1];
+	arg2 = argv[2];
+
+
+	if (arg1 == "-r") {	// read file into memory
+
+		char response;
+		int zipResponse;
+
+		filename = argv[2];
 		inFile.open(filename); // access the data file and associate to filestream object
-		vector<vector<zip>> states; // array of state vectors
-		readIn(inFile, states);  // same as readIn from project 1
 
-		printTable(states);
+		primaryIndex indexList(inFile);
 
-		outFileD.open("DataFile.licsv");
-		outFileI.open("IndexFile.index");
+		iFile.open("IndexFile.index");
+		dFile.open("DataFile.licsv");
 
-		transfer(outFileD, outFileI, states, indexList);
+		cout << "file imported successfully\n";
+		cout << "do you want to search the database? (Y/N): ";
+		cin >> response;
+		if (tolower(response) == 'y') {
+			cout << "\nPlease enter a valid zip: ";
+			cin >> zipResponse;
 
+			offset = indexList.search(zipResponse);
+			if (offset == 0) { cout << "Sorry! We can't seem to find that one."; return -2; }
+			indicated.read(dFile, offset);
+			for (int i = 0; i < 6; i++) {
+				string temp = "";
+				switch(i) {
+				case 0:
+					cout << "\nZip Code: ";
+					indicated.unpack(temp);
+					cout << temp;
+					break;
+				case 1: 
+					cout << " Place Name: ";
+					indicated.unpack(temp);
+					cout << temp;
+					break;
+				case 2:
+					cout << " State: ";
+					indicated.unpack(temp);
+					cout << temp;
+					break;
+				case 3:
+					cout << " County: ";
+					indicated.unpack(temp);
+					cout << temp;
+					break;
+				case 4:
+					cout << " Lat: ";
+					indicated.unpack(temp);
+					cout << temp;
+					break;
+				default:
+					cout << " Long: ";
+					indicated.unpack(temp);
+					cout << temp;
+					break;
+				}
+			}
+		}
+
+		return 1;
 	}
-	else if (args[1] == "-z") {	// search for zip
+	else if (argv[1] == "-z") {	// search for zip
 
-		queryZip = stoi(args[2]);
-		indexList.search(queryZip);
+		iFile.open("IndexFile.index");
+		dFile.open("DataFile.licsv");
+		bool found = false;
+
+		primaryIndex indexList(iFile, dFile);
+
+		queryZip = stoi(argv[2]);
+		offset = indexList.search(queryZip);
+		if (offset == 0) { cout << "Sorry! We can't seem to find that one.\n"; return -2; }
+		indicated.read(dFile, offset);
+		for (int i = 0; i < 6; i++) {
+			string temp = "";
+			switch(i) {
+			case 0:
+				cout << "Zip Code: ";
+				indicated.unpack(temp);
+				cout << temp;
+				break;
+			case 1: 
+				cout << " Place Name: ";
+				indicated.unpack(temp);
+				cout << temp;
+				break;
+			case 2:
+				cout << " State: ";
+				indicated.unpack(temp);
+				cout << temp;
+				break;
+			case 3:
+				cout << " County: ";
+				indicated.unpack(temp);
+				cout << temp;
+				break;
+			case 4:
+				cout << " Lat: ";
+				indicated.unpack(temp);
+				cout << temp;
+				break;
+			default:
+				cout << " Long: ";
+				indicated.unpack(temp);
+				cout << temp;
+				break;
+			}
+		}
 	}
 	else {	// invalid arguments 
 
 		cout << "invalid arguments";
-		return -2;
-	
+		return -1;
 	}
 	
 
 	cout << "Hello World" << endl;
 
-	outFile.close();
-	outFileD.close(); 
-	outFileI.close();
+	dFile.close();  // definitely nothing to see here
+	iFile.close();
 	inFile.close();
+
 	return 1;
-}
-
-/*
-@brief Builds the header architecture. 
-@pre Receives a a data file and the input file. 
-@param1 oFileD an ofstream variable which contains the address of the length-indicated file.  
-@param2 oFileI an ofstream variable which contains the address of the index file.
-*/
-
-void buildHeader(ofstream& oFileD, ifstream& inFile){
-	string header, temp, record;
-	int count = 0;
-	record.append("Structure Type: Lengh Indexed Comma Separated File\n");
-	record.append("Version: 1.0\n");
-
-	//obtain the header
-	for (int i = 0; i < 3; i++) {
-		getline(inFile, temp);
-		header.append(temp);
-	}
-
-	//Determine size of record
-	record.append("Record Size: ");
-	record.append(header.size());
-	record.push_back('\n');
-
-	//Size format type
-	record.append("Size Format: 2-digit ASCII\n");
-
-	//Index File Name
-	record.append("Index File: IndexFile.index\n");
-
-	//Index File Schema Information
-	record.append("Index File Schema: Listed by zip code then corresponding offset, sorted by zip code\n");
-
-	//Record Count
-	record.append("Record Count: 40933\n");
-
-	//Count of fields per record 
-	for(int j = 0; j < header.size(); j++){
-		if(header[j] == ',' ){
-			count++;
-		}
-	}
-	if (!header.is_empty())
-		count++;
-	record.append("Fields per Record: ");
-	record.append(count);
-	record.push_back('\n');
-
-	//Name of each field
-	record.append("Name of Fields: ");
-	record.append(header);
-	record.push_back('\n');
-
-	//Type Schema
-	//record.append("Type Schema:")
-
-	//Indicate which field is primary key
-	record.append("First Key: Zip Code");
-	record.append(temp);
-	record.push_back('\n');
-
-	//Send Header Architecture to the file
-	oFileD << record;
-
-}
-
-/*
-@brief Sends data from vector of vectors to length-indicated file.
-@pre Takes in the length-indicated data file, the index file, the vector of vectors, and the list of indices. 
-@param1 oFileD an ofstream variable which contains the address of the length-indicated file.  
-@param2 oFileI an ofstream variable which contains the address of the index file.
-@param3 states a vector<vector<zip>> which contains all of records from the given csv.
-@param4 indexList a primaryIndex class reference which stores the indices
-*/
-void transfer(ofstream& oFileD, ofstream& oFileI, vector<vector<zip>> states, primaryIndex& indexList) {
-	string temp, data;
-	LIBuffer buffer;
-	int count = 0, offsetSum = 0;
-
-	for(int i = 0; i < numStates; i++) {
-		for(int j = 0; j < states[i][j].size()) {
-			temp = states[i][j].getNum();
-			temp.append(itos(states[i][j].getCity()));
-			temp.push_back(',');
-			temp.append(states[i][j].getStateCode);
-			temp.push_back(',');
-			temp.append(states[i][j].getCounty();
-			temp.push_back(',');
-			temp.append(ftos(states[i][j].getLat()));
-			temp.push_back(',');
-			temp.append(ftos(states[i][j].getLon()));
-			count = temp.size();
-			data = itos(count);
-			data.append(temp);
-			buffer.pack(data);
-			buffer.write(oFileD);
-			offsetSum += buffer.size() + 2;
-			indexList.add(temp.getNum(), offsetSum);
-		}
-	}
-	buffer.writeIndex(oFileI, index);
-
-}
-
-
-/**
-@brief Read in data from the csv, place on buffer,
-*and parse onto zip class data members;
-@pre Receives address of the file stream,
-*receives a pointer to an array of state vectors.  
-@post zip code records have been read into zip objects,
-*zip objects have been sorted to their respective state vectors.
-*/
-void readIn(ifstream& inFile, vector<vector<zip>>& states) {
-
-	zip temp; // temporary storage for parsed record
-	string item; // stores one field at a time before it's added to temp
-	string headerData;
-	vector<string> headerElement;
-	int offsetSum;
-	delimBuffer b; // create buffer object
-
-	for (int i = 0; i < 3; ++i) {
-		b.read(inFile);
-		headerData.append(b.getBuffer());
-
-	}
-	
-	// places each element of the entire header onto seperate elements of a vector
-	for (int i = 0, j = 0; i < headerData.size(), ++i) {
-		while (headerData[i] != ',') {
-			if (headerData[i] != '\"' && headerData[i] != '\n') {
-				headerElement[j].tolower();
-				headerElement[j].push_back(headerData[i]);
-			}
-			i++;
-		}
-		i++;
-		j++;
-		headerElement.tolower();
-	}
-	int tag = 0;
-
-	while (b.read(inFile)) { // loop until end of file
-
-
-		while (b.unpack(item)) {
-
-			if (headerElement[tag] == "zipcode") {
-				temp.setNum(stoi(item));	//If it is a zip code
-			}
-			else if (headerElement[tag] == "placename") {
-				temp.setCity(item);			//If it is a city
-			}
-			else if (headerElement[tag] == "state") {
-				temp.setStateCode(item);	//If it is a state code
-			}
-			else if (headerElement[tag] == "county") {
-				temp.setCounty(item);		//if it is a county
-			}
-			else if (headerElement[tag] == "lat") {
-				temp.setLat(stof(item));	//If it is a latitude
-			}
-			else if (headerElement[tag] == "long") {
-				temp.setLon(stof(item));	//If it is a longitude
-			}
-			++tag;
-
-			/*switch (headerElement[tag]) {
-			case 0: temp.setNum(stoi(item));	//If it is a zip code
-				break;
-			case 1: temp.setCity(item);			//If it is a city
-				break;
-			case 2: temp.setStateCode(item);	//If it is a state code
-				break;
-			case 3: temp.setCounty(item);		//if it is a county
-				break;
-			case 4: temp.setLat(stof(item));	//If it is a latitude
-				break;
-			default: temp.setLon(stof(item));	//If it is a longitude
-				tag = -1; break;
-			}
-			item = ""; //ittemm
-			*/
-		}
-		states[stateChooser(temp.getStateCode())].push_back(zip(temp));
-		// new zip object with same values as temp is added to the end of the corresponding state vector
-		// cooresponding entry is placed into primary index
-	}
-}
-
-
-
-
-
-/**
-@brief Prints the state arrays zip code state code  
-@pre Receives the array of state objects 
-@post prints a table of the most north, south, east,
-* and west zip codes of each state
-*/
-string printTable(vector<vector<zip>> states) {
-
-	string output;
-
-	output.append("*****************************************************\n");
-	output.append("*State\t|East\t\t|West\t\t|North\t\t|South\t*\n");
-	output.append("*****************************************************\n");
-
-	for (int i = 0; i < numStates; i++) {
-		output.append("*");
-		output.append(states[i][0].getStateCode());
-		output.append("\t\t|");
-		output.append(to_string(states[i][mostEast(states[i])].getNum())); 
-		output.append("\t\t|");
-		output.append(to_string(states[i][mostWest(states[i])].getNum()));					// MoWestuth
-		output.append("\t\t|");
-		output.append(to_string(states[i][mostNorth(states[i])].getNum()));
-		output.append("\t\t|");
-		output.append(to_string(states[i][mostSouth(states[i])].getNum()));					// MosSouthst
-		output.append("\t*\n");																
-	}
-	output.append("*****************************************************\n");
-	output.append("*State\t|East\t\t|West\t\t|North\t\t|South\t*\n");
-	output.append("*****************************************************");
-
-	return output;
-}
-
-
-
-/**
- * @brief Finds the most north zipcode of a given state
- * @pre Takes an element of the state array.  
- * @post returns the index of the most north zipcode.
- */
-short mostNorth(vector<zip> state) {
-	short x = 0;
-	for (int i = 1; i < state.size(); i++) {
-		if (state[i].getLat() > state[i-1].getLat())
-			x = i;
-	}
-	return x;
-}
-
-/**
- * @brief Finds the most south zipcode of a given state
- * @pre Takes an element of the state array.  
- * @post returns the index of the most south zipcode.
- */
-short mostSouth(vector<zip> state) {
-	short x = 0;
-	for (int i = 1; i < state.size(); i++) {
-		if (state[i].getLat() < state[i-1].getLat())
-			x = i;
-	}
-	return x;
-}
-
-/**
- * @brief Finds the most "esta" zipcode of a given state
- * @pre Takes an element of the state array.  
- * @post returns the index of the most east zipcode.
- */
-short mostEast(vector<zip> state) {
-	short x = 0;
-	for (int i = 1; i < state.size(); i++) {
-		if (state[i].getLon() < state[i-1].getLon())
-			x = i;
-	}
-	return x;
-}
-
-/**
- * @brief Finds the most west zipcode of a given state
- * @pre Takes an element of the state array.  
- * @post returns the index of the most west zipcode.
- */
-short mostWest(vector<zip> state) {
-	short x = 0;
-	for (int i = 1; i < state.size(); i++) {
-		if (state[i].getLon() > state[i-1].getLon())
-			x = i;
-	}
-	return x;
-}
-
-
-
-
-
-/******************************************STOP SCROLLING FOR YOUR OWN GOOD******************************************/
-
-// You've been warned!!
-
-// Last chance to turn around!
-
-// Point of 58 returns;
-
-/**
-* @brief Chooses which state array index is correct
-* with the use of a switch statement
-* @pre two character state code in a string is used as parameter
-* @post Returns the correct array index as an int
-*/
-short stateChooser(string x) {
-
-		 if (x == "AA")	return 0;	//C++ doesn't like strings and switch statements together ;(. Amenrican Airlines?	
-	else if (x == "AK") return 1;
-	else if (x == "AL") return 2;
-	else if (x == "AP") return 3;
-	else if (x == "AR") return 4;
-	else if (x == "AZ") return 5;
-	else if (x == "CA") return 6;
-	else if (x == "CO") return 7;
-	else if (x == "CT") return 8;
-	else if (x == "DC") return 9;
-	else if (x == "DE") return 10;
-	else if (x == "FL") return 11;
-	else if (x == "FM") return 12;
-	else if (x == "GA") return 13;
-	else if (x == "HI") return 14;
-	else if (x == "IA") return 15;
-	else if (x == "ID") return 16;
-	else if (x == "IL") return 17;
-	else if (x == "IN") return 18;
-	else if (x == "KS") return 19;
-	else if (x == "KY") return 20;
-	else if (x == "LA") return 21;
-	else if (x == "MA") return 22;
-	else if (x == "MD") return 23;
-	else if (x == "ME") return 24;
-	else if (x == "MH") return 25;
-	else if (x == "MI") return 26;
-	else if (x == "MN") return 27;
-	else if (x == "MO") return 28;
-	else if (x == "MP") return 29;
-	else if (x == "MS") return 30;
-	else if (x == "MT") return 31;
-	else if (x == "NC") return 32;
-	else if (x == "ND") return 33;
-	else if (x == "NE") return 34;
-	else if (x == "NH") return 35;
-	else if (x == "NJ") return 36;
-	else if (x == "NM") return 37;
-	else if (x == "NV") return 38;
-	else if (x == "NY") return 39;
-	else if (x == "OH") return 40;
-	else if (x == "OK") return 41;
-	else if (x == "OR") return 42;
-	else if (x == "PA") return 43;
-	else if (x == "PW") return 44;
-	else if (x == "RI") return 45;
-	else if (x == "SC") return 46;
-	else if (x == "SD") return 47;
-	else if (x == "TN") return 48;
-	else if (x == "TX") return 49;
-	else if (x == "UT") return 50;
-	else if (x == "VA") return 51;
-	else if (x == "VT") return 52;
-	else if (x == "WA") return 53;
-	else if (x == "WI") return 54;
-	else if (x == "WV") return 55;
-	else if (x == "WY") return 56;
-	else /****HELP****/ return -1;
-
 }

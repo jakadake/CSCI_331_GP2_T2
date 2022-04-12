@@ -32,8 +32,6 @@ public:
 	*/
 	bool read(ifstream& inFile);
 
-	bool write(ofstream& outFile);
-
 	/**
 	@brief Seperates each field from the line on the delimBuffer
 	@pre delimBuffer must not be empty
@@ -41,12 +39,11 @@ public:
 	*/
 	bool unpack(string & field);
 
-	bool pack(string& field);
-
 	/**
 	@brief Gives the delimBuffer string  
 	@post Returns the delimBuffer string  
 	*/
+	void setBuffer(string x) { buf = x; };
 	string getBuffer() { return buf; };
 
 

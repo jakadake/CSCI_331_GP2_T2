@@ -41,23 +41,28 @@ LIBuffer::LIBuffer(char delim = ',', int maxsize = 1000) {
 @param1 inFile an ifstream variable which contains the address of the length-indicated file.  
 @param2 offset an integer variable which contains the offset for the specific record.
 */
-bool LIBuffer::read(ifstream& inFile, int offset) {
+bool LIBuffer::read(fstream& dFile, unsigned long offset) {
 	char temp1, temp2;
 	int length;
-
 	index = 0;
 	buf = "";
+	size = 0;
 	
-	inFile.seekg(offset);	// seek to start of record
-	inFile >> temp1 >> temp2; // get first two characters to decode length
+	dFile.seekg(offset);	// seek to start of record
+	
+	temp1 = dFile.get();  // get first two characters to decode length
+	temp2 = dFile.get();
 	buf.push_back(temp1); // add characters to buffer
 	buf.push_back(temp2);
 
 	length = stoi(buf); // convert length ascii to int
 
+	buf = "";
+
 	for (int i = 0; i < length; i++) { // copy as many characters as the length indicates
-		inFile >> temp1;
+		dFile.get(temp1);
 		buf.push_back(temp1);
+		size++;
 	}
 
 	return true;
@@ -70,12 +75,18 @@ bool LIBuffer::read(ifstream& inFile, int offset) {
 @param2 record a zip class variable.
 @post returns true or false if the file wrote correctly.
 */
-bool LIBuffer::write(ofstream& outFile) {
-	buf.insert(0, itos(buf.size()));
+void LIBuffer::write(fstream& outFile) {
+	buf.insert(0, to_string(buf.size()));
 	outFile << buf;
-
+	buf = "";
 }
 
+/*
+@brief Unpacks a string of record fields. 
+@pre Receives a string of fields. 
+@param1 field a string reference of record fields.  
+@post Returns true if string was unpacked else it returns false.
+*/
 bool LIBuffer::unpack(string& field) {
 	if (index != size && size != 0) { // execute only when LIBuffer is not empty
 
@@ -90,6 +101,6 @@ bool LIBuffer::unpack(string& field) {
 	return false;
 }
 
-bool LIBuffer::pack(string& field) {
+void LIBuffer::pack(string& field) {
 	buf.append(field);
 }

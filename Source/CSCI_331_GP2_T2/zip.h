@@ -20,26 +20,26 @@ public:
 
 	/**
 	@brief default constructor
-	@post initializes zip object to be empty 
+	@post initializes zip object to be empty
 	*/
 	zip();
 
 	/**
 	@brief specified constructor
 	@pre Takes in the zipcode, city of zipcode, 2 character string statecode,
-	*string for the county, floating point of the latitude, and floating point of the longitude. 
+	*string for the county, floating point of the latitude, and floating point of the longitude.
 	*/
 	zip(int newNum, string newCity, string newStateCode, string newCounty, float newLat, float newLon);
 
 	/**
 	@brief copy constructor
 	*/
-	zip(zip* oldZip);
+	zip(const zip& oldZip);
 
 	/**
 	@brief Inline setters and getters
 	*/
-	
+
 	void setNum(int newNum) { num = newNum; };
 
 	int getNum() { return num; };
@@ -61,8 +61,13 @@ public:
 	float getLat() { return lat; };
 
 	void setLon(float newLon) { lon = newLon; };
-	
+
 	float getLon() { return lon; };
+
+	void print() {
+		cout << "\nZip Code:" << to_string(num) << ", City: " << city << ", County: " << county 
+			<< ", stateCode: " << stateCode << ", Lat: " << to_string(lat) << ", Lon: " << to_string(lon) << "\n";
+	}
  
 private:
 	int num;
