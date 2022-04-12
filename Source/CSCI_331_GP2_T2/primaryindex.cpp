@@ -69,8 +69,8 @@ unsigned long primaryIndex::binSearch(int target, int l, int r) {
 	if (l > r) { return 0; }
 	if (r >= l) {
 		int mid = (l + r) / 2;		//nothing to see here
-		cout << index[mid].zip << ' ' << index[mid].offset << endl;
-		cout << l << ' ' << mid << ' ' << r << endl;
+		//cout << index[mid].zip << ' ' << index[mid].offset << endl;
+		//cout << l << ' ' << mid << ' ' << r << endl;
 		if (index[mid].zip == target) {
 			cout << "Target hit!: " << index[mid].zip << ' ' << index[mid].offset << endl;
 			return index[mid].offset;
@@ -202,7 +202,6 @@ string primaryIndex::buildHeader(string headerData) {
 
 	//Indicate which field is primary key
 	record.append("First Key: Zip Code\n");
-	cout << record << endl;
 	return record;
 
 }
@@ -225,8 +224,6 @@ void primaryIndex::transfer(vector<vector<zip>>& states, string headerData) {
 	LIBuffer buf;
 	unsigned long count = 0;
 	unsigned long offsetSum = header.size() + 11;
-
-	cout << "Header Size: " << offsetSum << endl;
 
 	for (int i = 0; i < numStates; i++) {
 		for (int j = 0; j < states[i].size(); j++) {
