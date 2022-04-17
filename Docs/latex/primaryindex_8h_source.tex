@@ -1,0 +1,67 @@
+\hypertarget{primaryindex_8h_source}{}\doxysection{primaryindex.\+h}
+\label{primaryindex_8h_source}\index{primaryindex.h@{primaryindex.h}}
+\mbox{\hyperlink{primaryindex_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_l_i_buffer_8h}{LIBuffer.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{zip_8h}{zip.h}}"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{delim_buffer_8h}{delimBuffer.h}}"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{struct }\mbox{\hyperlink{structindex_element}{indexElement}} \{}
+\DoxyCodeLine{18     }
+\DoxyCodeLine{19     \textcolor{keywordtype}{int} \mbox{\hyperlink{structindex_element_ad478fb051803bc78812cf3723cf3dd88}{zip}};}
+\DoxyCodeLine{20     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} \mbox{\hyperlink{structindex_element_a8890743f900fe88bd9e9cf3a2d291479}{offset}};}
+\DoxyCodeLine{21 \};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{classprimary_index}{primaryIndex}} \{}
+\DoxyCodeLine{24 \textcolor{keyword}{public}:}
+\DoxyCodeLine{25     \mbox{\hyperlink{classprimary_index_a2fcc418e0267a833f9b37e1629b0a139}{primaryIndex}}(); }
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \mbox{\hyperlink{classprimary_index_a59626c44dce0db1317f181487043cbc3}{primaryIndex}}(\textcolor{keywordtype}{string} iFileName, \textcolor{keywordtype}{string} dFileName) \{ \mbox{\hyperlink{classprimary_index_aedf34e73f8ca243521ed4325815729af}{iFile}}.open(iFileName); \mbox{\hyperlink{classprimary_index_a6def1092c8f9da43541e04938062ed65}{dFile}}.open(dFileName); \mbox{\hyperlink{classprimary_index_a4785d5e19dbbb7871fcd57e87027258a}{readIndex}}(); \mbox{\hyperlink{classprimary_index_aedf34e73f8ca243521ed4325815729af}{iFile}}.close(); \mbox{\hyperlink{classprimary_index_a6def1092c8f9da43541e04938062ed65}{dFile}}.close(); \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \mbox{\hyperlink{classprimary_index_af3b8a4498a8cc92a221cdd9059c7dd98}{primaryIndex}}(ifstream\& infile) \{ \mbox{\hyperlink{classprimary_index_af84b7877b42cbda44a269628e766b029}{readCSV}}(infile); \}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{void} \mbox{\hyperlink{classprimary_index_a9b0903b78a058090a160883811bbf0be}{add}}(\textcolor{keywordtype}{int} z, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} o);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{classprimary_index_a2357aca48b8aa85b84c09295d32a4b16}{search}}(\textcolor{keywordtype}{int} target);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordtype}{void} \mbox{\hyperlink{classprimary_index_a2142662b1ed9f4fdbedd66d3617b0970}{writeToFile}}();}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} \mbox{\hyperlink{classprimary_index_a4785d5e19dbbb7871fcd57e87027258a}{readIndex}}();}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keywordtype}{void} \mbox{\hyperlink{classprimary_index_af84b7877b42cbda44a269628e766b029}{readCSV}}(ifstream\&);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{private}:}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keywordtype}{string} \mbox{\hyperlink{classprimary_index_a3ba990c3f7b2fcf2efa72c338cfce869}{printTable}}(vector<vector<zip>>\&); \textcolor{comment}{// output data table}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{short} \mbox{\hyperlink{classprimary_index_a2023454627ab145fd6aaee60761f8ca5}{stateChooser}}(\textcolor{keywordtype}{string} x);   \textcolor{comment}{// return index of state with given 2 letter code}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{keywordtype}{short} \mbox{\hyperlink{classprimary_index_abc3d98f73c761e7484a6f69105ac8807}{mostNorth}}(vector<zip>); \textcolor{comment}{// searches a given state to find the most northern zipcode}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{short} \mbox{\hyperlink{classprimary_index_adeb8b23882b8965c371562483cae41f9}{mostSouth}}(vector<zip>); \textcolor{comment}{// searches a given state to find the most southern zipcode}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keywordtype}{short} \mbox{\hyperlink{classprimary_index_aa65cf7d31b45f7e3f212ea9551abf88c}{mostEast}}(vector<zip>); \textcolor{comment}{// searches a given state to find the most eastern zipcode //moost steeast}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{short} \mbox{\hyperlink{classprimary_index_a45379fc9dc2c893e34a4f430217bd0d5}{mostWest}}(vector<zip>); \textcolor{comment}{// searches a given state to find the most western zipcode}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \textcolor{keywordtype}{string} \mbox{\hyperlink{classprimary_index_a1dd3ecd4a2c21a0cac17956c28389c67}{readIn}}(ifstream\& inFile, vector<vector<zip>>\& states);}
+\DoxyCodeLine{56     }
+\DoxyCodeLine{57     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{classprimary_index_a3484d889f6ad407791c81b375aabafa4}{binSearch}}(\textcolor{keywordtype}{int} target, \textcolor{keywordtype}{int} l, \textcolor{keywordtype}{int} r);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} \mbox{\hyperlink{classprimary_index_aae741acdccf8751e77be05fd9a12d7d8}{transfer}}(vector<vector<zip>>\&, \textcolor{keywordtype}{string});}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{keywordtype}{string} \mbox{\hyperlink{classprimary_index_aeddb3050d8e03b112dff3860c1974212}{buildHeader}}(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     vector<indexElement> \mbox{\hyperlink{classprimary_index_acb4a70581eb3f824bdd28e040af73739}{index}};}
+\DoxyCodeLine{64     \textcolor{keywordtype}{int} \mbox{\hyperlink{classprimary_index_aa22a0e4ea05166b08f748fe8a8c2c6f5}{recCount}};}
+\DoxyCodeLine{65     fstream \mbox{\hyperlink{classprimary_index_a6def1092c8f9da43541e04938062ed65}{dFile}}, \mbox{\hyperlink{classprimary_index_aedf34e73f8ca243521ed4325815729af}{iFile}};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,196 @@
+\hypertarget{classdelim_buffer}{}\doxysection{delim\+Buffer Class Reference}
+\label{classdelim_buffer}\index{delimBuffer@{delimBuffer}}
+
+
+class to store each record and parse each field  
+
+
+
+
+{\ttfamily \#include $<$delim\+Buffer.\+h$>$}
+
+
+
+Collaboration diagram for delim\+Buffer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classdelim_buffer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdelim_buffer_ae7c6ae5b71f673b03e5570f4c3ae0a7a}{delim\+Buffer}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classdelim_buffer_aa283306e8b4dacc8cf3591dc67502f06}{delim\+Buffer}} (char, int)
+\item 
+bool \mbox{\hyperlink{classdelim_buffer_a8a99dbb91e92f75de7ee1b7d676680d7}{read}} (ifstream \&in\+File)
+\begin{DoxyCompactList}\small\item\em reads from csv file and places on string \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classdelim_buffer_a9b181038a828d12e7dff04935d8de516}{unpack}} (string \&field)
+\begin{DoxyCompactList}\small\item\em Seperates each field from the line on the \mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classdelim_buffer_af80a9c82a3979be4cbd2d4cf17851f6e}{set\+Buffer}} (string x)
+\begin{DoxyCompactList}\small\item\em Gives the \mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}} string ~\newline
+ \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classdelim_buffer_ac174f9b2f96ff5d07bd3d3239f94ef74}{get\+Buffer}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{classdelim_buffer_a77cdccb57e2455a1f8378b638c66aff8}{delim}}
+\item 
+int \mbox{\hyperlink{classdelim_buffer_a458ddd6415ca64022a657e0b7ee5f251}{size}}
+\item 
+int \mbox{\hyperlink{classdelim_buffer_ac9f1783145827eaaa3cb49568cae4fd3}{maxsize}}
+\item 
+int \mbox{\hyperlink{classdelim_buffer_a7ec20e0e801ad853c0d20245dc9f76b0}{index}}
+\item 
+string \mbox{\hyperlink{classdelim_buffer_a6afcf77521b18c518857f1e68bf642cf}{buf}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class to store each record and parse each field 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdelim_buffer_ae7c6ae5b71f673b03e5570f4c3ae0a7a}\label{classdelim_buffer_ae7c6ae5b71f673b03e5570f4c3ae0a7a}} 
+\index{delimBuffer@{delimBuffer}!delimBuffer@{delimBuffer}}
+\index{delimBuffer@{delimBuffer}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{delimBuffer()}{delimBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily delim\+Buffer\+::delim\+Buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor for the \mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}} class. 
+
+\begin{DoxyPrecond}{Precondition}
+Takes in the address to the us\+\_\+postal\+\_\+codes.\+csv file ~\newline
+ 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+in\+File, index and buf are all initialized
+\end{DoxyPostcond}
+\mbox{\hyperlink{delim_buffer_8cpp}{delim\+Buffer.\+CPP}} Member function definitions for the \mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}} class. ~\newline
+ \mbox{\Hypertarget{classdelim_buffer_aa283306e8b4dacc8cf3591dc67502f06}\label{classdelim_buffer_aa283306e8b4dacc8cf3591dc67502f06}} 
+\index{delimBuffer@{delimBuffer}!delimBuffer@{delimBuffer}}
+\index{delimBuffer@{delimBuffer}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{delimBuffer()}{delimBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily delim\+Buffer\+::delim\+Buffer (\begin{DoxyParamCaption}\item[{char}]{delim = {\ttfamily \textquotesingle{},\textquotesingle{}},  }\item[{int}]{maxsize = {\ttfamily 1000} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdelim_buffer_ac174f9b2f96ff5d07bd3d3239f94ef74}\label{classdelim_buffer_ac174f9b2f96ff5d07bd3d3239f94ef74}} 
+\index{delimBuffer@{delimBuffer}!getBuffer@{getBuffer}}
+\index{getBuffer@{getBuffer}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{getBuffer()}{getBuffer()}}
+{\footnotesize\ttfamily string delim\+Buffer\+::get\+Buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classdelim_buffer_ac174f9b2f96ff5d07bd3d3239f94ef74_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classdelim_buffer_a8a99dbb91e92f75de7ee1b7d676680d7}\label{classdelim_buffer_a8a99dbb91e92f75de7ee1b7d676680d7}} 
+\index{delimBuffer@{delimBuffer}!read@{read}}
+\index{read@{read}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily bool delim\+Buffer\+::read (\begin{DoxyParamCaption}\item[{ifstream \&}]{in\+File }\end{DoxyParamCaption})}
+
+
+
+reads from csv file and places on string 
+
+\begin{DoxyPostcond}{Postcondition}
+returns the string of one line of us\+\_\+postal\+\_\+codes.\+csv 
+\end{DoxyPostcond}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classdelim_buffer_a8a99dbb91e92f75de7ee1b7d676680d7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classdelim_buffer_af80a9c82a3979be4cbd2d4cf17851f6e}\label{classdelim_buffer_af80a9c82a3979be4cbd2d4cf17851f6e}} 
+\index{delimBuffer@{delimBuffer}!setBuffer@{setBuffer}}
+\index{setBuffer@{setBuffer}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{setBuffer()}{setBuffer()}}
+{\footnotesize\ttfamily void delim\+Buffer\+::set\+Buffer (\begin{DoxyParamCaption}\item[{string}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gives the \mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}} string ~\newline
+ 
+
+\begin{DoxyPostcond}{Postcondition}
+Returns the \mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}} string ~\newline
+ 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{classdelim_buffer_a9b181038a828d12e7dff04935d8de516}\label{classdelim_buffer_a9b181038a828d12e7dff04935d8de516}} 
+\index{delimBuffer@{delimBuffer}!unpack@{unpack}}
+\index{unpack@{unpack}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{unpack()}{unpack()}}
+{\footnotesize\ttfamily bool delim\+Buffer\+::unpack (\begin{DoxyParamCaption}\item[{string \&}]{field }\end{DoxyParamCaption})}
+
+
+
+Seperates each field from the line on the \mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}}. 
+
+\begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{classdelim_buffer}{delim\+Buffer}} must not be empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Makes parameter string equal to correct field in record 
+\end{DoxyPostcond}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classdelim_buffer_a9b181038a828d12e7dff04935d8de516_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdelim_buffer_a6afcf77521b18c518857f1e68bf642cf}\label{classdelim_buffer_a6afcf77521b18c518857f1e68bf642cf}} 
+\index{delimBuffer@{delimBuffer}!buf@{buf}}
+\index{buf@{buf}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{buf}{buf}}
+{\footnotesize\ttfamily string delim\+Buffer\+::buf\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classdelim_buffer_a77cdccb57e2455a1f8378b638c66aff8}\label{classdelim_buffer_a77cdccb57e2455a1f8378b638c66aff8}} 
+\index{delimBuffer@{delimBuffer}!delim@{delim}}
+\index{delim@{delim}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{delim}{delim}}
+{\footnotesize\ttfamily char delim\+Buffer\+::delim\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classdelim_buffer_a7ec20e0e801ad853c0d20245dc9f76b0}\label{classdelim_buffer_a7ec20e0e801ad853c0d20245dc9f76b0}} 
+\index{delimBuffer@{delimBuffer}!index@{index}}
+\index{index@{index}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{index}{index}}
+{\footnotesize\ttfamily int delim\+Buffer\+::index\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classdelim_buffer_ac9f1783145827eaaa3cb49568cae4fd3}\label{classdelim_buffer_ac9f1783145827eaaa3cb49568cae4fd3}} 
+\index{delimBuffer@{delimBuffer}!maxsize@{maxsize}}
+\index{maxsize@{maxsize}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{maxsize}{maxsize}}
+{\footnotesize\ttfamily int delim\+Buffer\+::maxsize\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classdelim_buffer_a458ddd6415ca64022a657e0b7ee5f251}\label{classdelim_buffer_a458ddd6415ca64022a657e0b7ee5f251}} 
+\index{delimBuffer@{delimBuffer}!size@{size}}
+\index{size@{size}!delimBuffer@{delimBuffer}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int delim\+Buffer\+::size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{delim_buffer_8h}{delim\+Buffer.\+h}}\item 
+\mbox{\hyperlink{delim_buffer_8cpp}{delim\+Buffer.\+cpp}}\end{DoxyCompactItemize}

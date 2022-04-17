@@ -1,0 +1,41 @@
+\hypertarget{delim_buffer_8h_source}{}\doxysection{delim\+Buffer.\+h}
+\label{delim_buffer_8h_source}\index{delimBuffer.h@{delimBuffer.h}}
+\mbox{\hyperlink{delim_buffer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#ifndef DELIMBUFFER\_h}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define DELIMBUFFER\_h}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{13 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{classdelim_buffer}{delimBuffer}} \{}
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{26     \mbox{\hyperlink{classdelim_buffer_ae7c6ae5b71f673b03e5570f4c3ae0a7a}{delimBuffer}}();}
+\DoxyCodeLine{27     \mbox{\hyperlink{classdelim_buffer_ae7c6ae5b71f673b03e5570f4c3ae0a7a}{delimBuffer}}(\textcolor{keywordtype}{char}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{33     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdelim_buffer_a8a99dbb91e92f75de7ee1b7d676680d7}{read}}(ifstream\& inFile);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdelim_buffer_a9b181038a828d12e7dff04935d8de516}{unpack}}(\textcolor{keywordtype}{string} \& field);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{46     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdelim_buffer_af80a9c82a3979be4cbd2d4cf17851f6e}{setBuffer}}(\textcolor{keywordtype}{string} x) \{ \mbox{\hyperlink{classdelim_buffer_a6afcf77521b18c518857f1e68bf642cf}{buf}} = x; \};}
+\DoxyCodeLine{47     \textcolor{keywordtype}{string} \mbox{\hyperlink{classdelim_buffer_ac174f9b2f96ff5d07bd3d3239f94ef74}{getBuffer}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classdelim_buffer_a6afcf77521b18c518857f1e68bf642cf}{buf}}; \};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keyword}{private}:}
+\DoxyCodeLine{53     \textcolor{keywordtype}{char} \mbox{\hyperlink{classdelim_buffer_a77cdccb57e2455a1f8378b638c66aff8}{delim}};}
+\DoxyCodeLine{54     \textcolor{keywordtype}{int} \mbox{\hyperlink{classdelim_buffer_a458ddd6415ca64022a657e0b7ee5f251}{size}};}
+\DoxyCodeLine{55     \textcolor{keywordtype}{int} \mbox{\hyperlink{classdelim_buffer_ac9f1783145827eaaa3cb49568cae4fd3}{maxsize}};}
+\DoxyCodeLine{56     \textcolor{keywordtype}{int} \mbox{\hyperlink{classdelim_buffer_a7ec20e0e801ad853c0d20245dc9f76b0}{index}};}
+\DoxyCodeLine{57     \textcolor{keywordtype}{string} \mbox{\hyperlink{classdelim_buffer_a6afcf77521b18c518857f1e68bf642cf}{buf}};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \};}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

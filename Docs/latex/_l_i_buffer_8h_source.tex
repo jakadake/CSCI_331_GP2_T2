@@ -1,0 +1,45 @@
+\hypertarget{_l_i_buffer_8h_source}{}\doxysection{LIBuffer.\+h}
+\label{_l_i_buffer_8h_source}\index{LIBuffer.h@{LIBuffer.h}}
+\mbox{\hyperlink{_l_i_buffer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#ifndef LIBUFFER\_h}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define LIBUFFER\_h}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{13 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{class_l_i_buffer}{LIBuffer}} \{}
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{26     \mbox{\hyperlink{class_l_i_buffer_a527e9c500f53b816f835a35f09f2efe8}{LIBuffer}}();}
+\DoxyCodeLine{27     \mbox{\hyperlink{class_l_i_buffer_a527e9c500f53b816f835a35f09f2efe8}{LIBuffer}}(\textcolor{keywordtype}{char}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{33     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_l_i_buffer_a807f94b227a826d123cef513fa63e967}{read}}(fstream\& inFile, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} offset);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_i_buffer_a6ddc13b1389a15d5609b96cb4eed3dc0}{write}}(fstream\& outFile);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_l_i_buffer_acb93346ce419cb69cf90c7ac643aa771}{unpack}}(\textcolor{keywordtype}{string}\& field);}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_i_buffer_a80045e61d24dcbb36ae87ab5052e8bdc}{pack}}(\textcolor{keywordtype}{string}\& field);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{50     \textcolor{keywordtype}{string} \mbox{\hyperlink{class_l_i_buffer_ab729d74e6cbc7cdf638e09977b053582}{getBuffer}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_l_i_buffer_a4b0f1ae4d186a6523453a2470f3331aa}{buf}}; \}}
+\DoxyCodeLine{51     }
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_i_buffer_ad8ef321e495fe39d5700c51bd7f0df6b}{getSize}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_l_i_buffer_a4b0f1ae4d186a6523453a2470f3331aa}{buf}}.size(); \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keyword}{private}:}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_i_buffer_a39baf4aaf6361f23d94b23894872dee1}{size}};}
+\DoxyCodeLine{59     \textcolor{keywordtype}{char} \mbox{\hyperlink{class_l_i_buffer_a3b03f08e4fa207b61bcf8f7ac5fbc917}{delim}};}
+\DoxyCodeLine{60     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_i_buffer_a0f46a878791e5e4f21de957f8a1c6e1c}{maxsize}};}
+\DoxyCodeLine{61     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_i_buffer_aa9de85cf0cafd42169b45fc7826610a7}{index}};}
+\DoxyCodeLine{62     \textcolor{keywordtype}{string} \mbox{\hyperlink{class_l_i_buffer_a4b0f1ae4d186a6523453a2470f3331aa}{buf}};}
+\DoxyCodeLine{63 \};}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

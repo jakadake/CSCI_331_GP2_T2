@@ -1,0 +1,215 @@
+\hypertarget{class_l_i_buffer}{}\doxysection{LIBuffer Class Reference}
+\label{class_l_i_buffer}\index{LIBuffer@{LIBuffer}}
+
+
+class to store each record and parse each field  
+
+
+
+
+{\ttfamily \#include $<$LIBuffer.\+h$>$}
+
+
+
+Collaboration diagram for LIBuffer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=150pt]{class_l_i_buffer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_l_i_buffer_a527e9c500f53b816f835a35f09f2efe8}{LIBuffer}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{class_l_i_buffer}{LIBuffer}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_l_i_buffer_aec905f0cfc225a509c26d501ca7efb44}{LIBuffer}} (char, int)
+\item 
+bool \mbox{\hyperlink{class_l_i_buffer_a807f94b227a826d123cef513fa63e967}{read}} (fstream \&in\+File, unsigned long offset)
+\begin{DoxyCompactList}\small\item\em reads from csv file and places on string \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_l_i_buffer_a6ddc13b1389a15d5609b96cb4eed3dc0}{write}} (fstream \&out\+File)
+\item 
+bool \mbox{\hyperlink{class_l_i_buffer_acb93346ce419cb69cf90c7ac643aa771}{unpack}} (string \&field)
+\begin{DoxyCompactList}\small\item\em Seperates each field from the line on the \mbox{\hyperlink{class_l_i_buffer}{LIBuffer}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_l_i_buffer_a80045e61d24dcbb36ae87ab5052e8bdc}{pack}} (string \&field)
+\item 
+string \mbox{\hyperlink{class_l_i_buffer_ab729d74e6cbc7cdf638e09977b053582}{get\+Buffer}} ()
+\begin{DoxyCompactList}\small\item\em Gives the \mbox{\hyperlink{class_l_i_buffer}{LIBuffer}} string. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_l_i_buffer_ad8ef321e495fe39d5700c51bd7f0df6b}{get\+Size}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_l_i_buffer_a39baf4aaf6361f23d94b23894872dee1}{size}}
+\item 
+char \mbox{\hyperlink{class_l_i_buffer_a3b03f08e4fa207b61bcf8f7ac5fbc917}{delim}}
+\item 
+int \mbox{\hyperlink{class_l_i_buffer_a0f46a878791e5e4f21de957f8a1c6e1c}{maxsize}}
+\item 
+int \mbox{\hyperlink{class_l_i_buffer_aa9de85cf0cafd42169b45fc7826610a7}{index}}
+\item 
+string \mbox{\hyperlink{class_l_i_buffer_a4b0f1ae4d186a6523453a2470f3331aa}{buf}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class to store each record and parse each field 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_l_i_buffer_a527e9c500f53b816f835a35f09f2efe8}\label{class_l_i_buffer_a527e9c500f53b816f835a35f09f2efe8}} 
+\index{LIBuffer@{LIBuffer}!LIBuffer@{LIBuffer}}
+\index{LIBuffer@{LIBuffer}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{LIBuffer()}{LIBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily LIBuffer\+::\+LIBuffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor for the \mbox{\hyperlink{class_l_i_buffer}{LIBuffer}} class. 
+
+\begin{DoxyPrecond}{Precondition}
+Takes in the address to the us\+\_\+postal\+\_\+codes.\+csv file 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+in\+File, index and buf are all initialized 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_l_i_buffer_aec905f0cfc225a509c26d501ca7efb44}\label{class_l_i_buffer_aec905f0cfc225a509c26d501ca7efb44}} 
+\index{LIBuffer@{LIBuffer}!LIBuffer@{LIBuffer}}
+\index{LIBuffer@{LIBuffer}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{LIBuffer()}{LIBuffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily LIBuffer\+::\+LIBuffer (\begin{DoxyParamCaption}\item[{char}]{delim = {\ttfamily \textquotesingle{},\textquotesingle{}},  }\item[{int}]{maxsize = {\ttfamily 1000} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_l_i_buffer_ab729d74e6cbc7cdf638e09977b053582}\label{class_l_i_buffer_ab729d74e6cbc7cdf638e09977b053582}} 
+\index{LIBuffer@{LIBuffer}!getBuffer@{getBuffer}}
+\index{getBuffer@{getBuffer}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{getBuffer()}{getBuffer()}}
+{\footnotesize\ttfamily string LIBuffer\+::get\+Buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gives the \mbox{\hyperlink{class_l_i_buffer}{LIBuffer}} string. 
+
+\begin{DoxyPostcond}{Postcondition}
+Returns the \mbox{\hyperlink{class_l_i_buffer}{LIBuffer}} string 
+\end{DoxyPostcond}
+\mbox{\Hypertarget{class_l_i_buffer_ad8ef321e495fe39d5700c51bd7f0df6b}\label{class_l_i_buffer_ad8ef321e495fe39d5700c51bd7f0df6b}} 
+\index{LIBuffer@{LIBuffer}!getSize@{getSize}}
+\index{getSize@{getSize}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{getSize()}{getSize()}}
+{\footnotesize\ttfamily int LIBuffer\+::get\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_l_i_buffer_a80045e61d24dcbb36ae87ab5052e8bdc}\label{class_l_i_buffer_a80045e61d24dcbb36ae87ab5052e8bdc}} 
+\index{LIBuffer@{LIBuffer}!pack@{pack}}
+\index{pack@{pack}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{pack()}{pack()}}
+{\footnotesize\ttfamily void LIBuffer\+::pack (\begin{DoxyParamCaption}\item[{string \&}]{field }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_i_buffer_a80045e61d24dcbb36ae87ab5052e8bdc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_i_buffer_a807f94b227a826d123cef513fa63e967}\label{class_l_i_buffer_a807f94b227a826d123cef513fa63e967}} 
+\index{LIBuffer@{LIBuffer}!read@{read}}
+\index{read@{read}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily bool LIBuffer\+::read (\begin{DoxyParamCaption}\item[{fstream \&}]{in\+File,  }\item[{unsigned long}]{offset }\end{DoxyParamCaption})}
+
+
+
+reads from csv file and places on string 
+
+\begin{DoxyPostcond}{Postcondition}
+returns the string of one line of us\+\_\+postal\+\_\+codes.\+csv 
+\end{DoxyPostcond}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{class_l_i_buffer_a807f94b227a826d123cef513fa63e967_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_i_buffer_acb93346ce419cb69cf90c7ac643aa771}\label{class_l_i_buffer_acb93346ce419cb69cf90c7ac643aa771}} 
+\index{LIBuffer@{LIBuffer}!unpack@{unpack}}
+\index{unpack@{unpack}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{unpack()}{unpack()}}
+{\footnotesize\ttfamily bool LIBuffer\+::unpack (\begin{DoxyParamCaption}\item[{string \&}]{field }\end{DoxyParamCaption})}
+
+
+
+Seperates each field from the line on the \mbox{\hyperlink{class_l_i_buffer}{LIBuffer}}. 
+
+\begin{DoxyPrecond}{Precondition}
+\mbox{\hyperlink{class_l_i_buffer}{LIBuffer}} must not be empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Makes parameter string equal to correct field in record 
+\end{DoxyPostcond}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{class_l_i_buffer_acb93346ce419cb69cf90c7ac643aa771_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_i_buffer_a6ddc13b1389a15d5609b96cb4eed3dc0}\label{class_l_i_buffer_a6ddc13b1389a15d5609b96cb4eed3dc0}} 
+\index{LIBuffer@{LIBuffer}!write@{write}}
+\index{write@{write}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void LIBuffer\+::write (\begin{DoxyParamCaption}\item[{fstream \&}]{out\+File }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_i_buffer_a6ddc13b1389a15d5609b96cb4eed3dc0_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_l_i_buffer_a4b0f1ae4d186a6523453a2470f3331aa}\label{class_l_i_buffer_a4b0f1ae4d186a6523453a2470f3331aa}} 
+\index{LIBuffer@{LIBuffer}!buf@{buf}}
+\index{buf@{buf}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{buf}{buf}}
+{\footnotesize\ttfamily string LIBuffer\+::buf\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_i_buffer_a3b03f08e4fa207b61bcf8f7ac5fbc917}\label{class_l_i_buffer_a3b03f08e4fa207b61bcf8f7ac5fbc917}} 
+\index{LIBuffer@{LIBuffer}!delim@{delim}}
+\index{delim@{delim}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{delim}{delim}}
+{\footnotesize\ttfamily char LIBuffer\+::delim\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_i_buffer_aa9de85cf0cafd42169b45fc7826610a7}\label{class_l_i_buffer_aa9de85cf0cafd42169b45fc7826610a7}} 
+\index{LIBuffer@{LIBuffer}!index@{index}}
+\index{index@{index}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{index}{index}}
+{\footnotesize\ttfamily int LIBuffer\+::index\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_i_buffer_a0f46a878791e5e4f21de957f8a1c6e1c}\label{class_l_i_buffer_a0f46a878791e5e4f21de957f8a1c6e1c}} 
+\index{LIBuffer@{LIBuffer}!maxsize@{maxsize}}
+\index{maxsize@{maxsize}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{maxsize}{maxsize}}
+{\footnotesize\ttfamily int LIBuffer\+::maxsize\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_i_buffer_a39baf4aaf6361f23d94b23894872dee1}\label{class_l_i_buffer_a39baf4aaf6361f23d94b23894872dee1}} 
+\index{LIBuffer@{LIBuffer}!size@{size}}
+\index{size@{size}!LIBuffer@{LIBuffer}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int LIBuffer\+::size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_l_i_buffer_8h}{LIBuffer.\+h}}\item 
+\mbox{\hyperlink{_l_i_buffer_8cpp}{LIBuffer.\+cpp}}\end{DoxyCompactItemize}

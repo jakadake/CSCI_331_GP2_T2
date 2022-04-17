@@ -1,0 +1,4 @@
+D:\Users\Jacob\Desktop\CSCI 331\Assignments\Group Project 2\Source\CSCI_331_GP2_T2\x64\Debug\CSCI_331_GP2_T2.exe -z 56304 40934 records in the file.
+Target hit!: 56304 927284
+Zip Code: 56304 Place Name: Saint Cloud State: MN County: Stearns Lat: 45.552101 Long: -94.128403
+Hello World!

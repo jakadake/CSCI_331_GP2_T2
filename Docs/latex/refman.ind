@@ -1,0 +1,249 @@
+\begin{theindex}
+
+  \item {add}
+    \subitem {primaryIndex}, \hyperpage{17}
+
+  \indexspace
+
+  \item {binSearch}
+    \subitem {primaryIndex}, \hyperpage{18}
+  \item {buf}
+    \subitem {delimBuffer}, \hyperpage{8}
+    \subitem {LIBuffer}, \hyperpage{14}
+  \item {buildHeader}
+    \subitem {primaryIndex}, \hyperpage{18}
+
+  \indexspace
+
+  \item {city}
+    \subitem {zip}, \hyperpage{34}
+  \item {county}
+    \subitem {zip}, \hyperpage{34}
+
+  \indexspace
+
+  \item {delim}
+    \subitem {delimBuffer}, \hyperpage{8}
+    \subitem {LIBuffer}, \hyperpage{14}
+  \item {delimBuffer}, \hyperpage{5}
+    \subitem {buf}, \hyperpage{8}
+    \subitem {delim}, \hyperpage{8}
+    \subitem {delimBuffer}, \hyperpage{6}
+    \subitem {getBuffer}, \hyperpage{6}
+    \subitem {index}, \hyperpage{8}
+    \subitem {maxsize}, \hyperpage{8}
+    \subitem {read}, \hyperpage{7}
+    \subitem {setBuffer}, \hyperpage{7}
+    \subitem {size}, \hyperpage{9}
+    \subitem {unpack}, \hyperpage{7}
+  \item {delimBuffer.cpp}, \hyperpage{35}
+  \item {delimBuffer.h}, \hyperpage{35, 36}
+  \item {dFile}
+    \subitem {primaryIndex}, \hyperpage{28}
+
+  \indexspace
+
+  \item {getBuffer}
+    \subitem {delimBuffer}, \hyperpage{6}
+    \subitem {LIBuffer}, \hyperpage{12}
+  \item {getCity}
+    \subitem {zip}, \hyperpage{31}
+  \item {getCounty}
+    \subitem {zip}, \hyperpage{31}
+  \item {getLat}
+    \subitem {zip}, \hyperpage{31}
+  \item {getLon}
+    \subitem {zip}, \hyperpage{31}
+  \item {getNum}
+    \subitem {zip}, \hyperpage{31}
+  \item {getSize}
+    \subitem {LIBuffer}, \hyperpage{12}
+  \item {getStateCode}
+    \subitem {zip}, \hyperpage{31}
+
+  \indexspace
+
+  \item {iFile}
+    \subitem {primaryIndex}, \hyperpage{28}
+  \item {index}
+    \subitem {delimBuffer}, \hyperpage{8}
+    \subitem {LIBuffer}, \hyperpage{14}
+    \subitem {primaryIndex}, \hyperpage{28}
+  \item {indexElement}, \hyperpage{9}
+    \subitem {offset}, \hyperpage{10}
+    \subitem {zip}, \hyperpage{10}
+
+  \indexspace
+
+  \item {lat}
+    \subitem {zip}, \hyperpage{34}
+  \item {LIBuffer}, \hyperpage{10}
+    \subitem {buf}, \hyperpage{14}
+    \subitem {delim}, \hyperpage{14}
+    \subitem {getBuffer}, \hyperpage{12}
+    \subitem {getSize}, \hyperpage{12}
+    \subitem {index}, \hyperpage{14}
+    \subitem {LIBuffer}, \hyperpage{11}
+    \subitem {maxsize}, \hyperpage{14}
+    \subitem {pack}, \hyperpage{12}
+    \subitem {read}, \hyperpage{12}
+    \subitem {size}, \hyperpage{14}
+    \subitem {unpack}, \hyperpage{13}
+    \subitem {write}, \hyperpage{13}
+  \item {LIBuffer.cpp}, \hyperpage{37}
+  \item {LIBuffer.h}, \hyperpage{37, 38}
+  \item {lon}
+    \subitem {zip}, \hyperpage{34}
+
+  \indexspace
+
+  \item {main}
+    \subitem {main.cpp}, \hyperpage{40}
+  \item {main.cpp}, \hyperpage{39}
+    \subitem {main}, \hyperpage{40}
+    \subitem {manual}, \hyperpage{40}
+  \item {manual}
+    \subitem {main.cpp}, \hyperpage{40}
+  \item {maxsize}
+    \subitem {delimBuffer}, \hyperpage{8}
+    \subitem {LIBuffer}, \hyperpage{14}
+  \item {mostEast}
+    \subitem {primaryIndex}, \hyperpage{19}
+  \item {mostNorth}
+    \subitem {primaryIndex}, \hyperpage{19}
+  \item {mostSouth}
+    \subitem {primaryIndex}, \hyperpage{20}
+  \item {mostWest}
+    \subitem {primaryIndex}, \hyperpage{20}
+
+  \indexspace
+
+  \item {num}
+    \subitem {zip}, \hyperpage{34}
+  \item {numStates}
+    \subitem {primaryindex.cpp}, \hyperpage{41}
+
+  \indexspace
+
+  \item {offset}
+    \subitem {indexElement}, \hyperpage{10}
+
+  \indexspace
+
+  \item {pack}
+    \subitem {LIBuffer}, \hyperpage{12}
+  \item {primaryIndex}, \hyperpage{15}
+    \subitem {add}, \hyperpage{17}
+    \subitem {binSearch}, \hyperpage{18}
+    \subitem {buildHeader}, \hyperpage{18}
+    \subitem {dFile}, \hyperpage{28}
+    \subitem {iFile}, \hyperpage{28}
+    \subitem {index}, \hyperpage{28}
+    \subitem {mostEast}, \hyperpage{19}
+    \subitem {mostNorth}, \hyperpage{19}
+    \subitem {mostSouth}, \hyperpage{20}
+    \subitem {mostWest}, \hyperpage{20}
+    \subitem {primaryIndex}, \hyperpage{16}
+    \subitem {printTable}, \hyperpage{21}
+    \subitem {readCSV}, \hyperpage{22}
+    \subitem {readIn}, \hyperpage{24}
+    \subitem {readIndex}, \hyperpage{25}
+    \subitem {recCount}, \hyperpage{28}
+    \subitem {search}, \hyperpage{25}
+    \subitem {stateChooser}, \hyperpage{26}
+    \subitem {transfer}, \hyperpage{26}
+    \subitem {writeToFile}, \hyperpage{27}
+  \item {primaryindex.cpp}, \hyperpage{41}
+    \subitem {numStates}, \hyperpage{41}
+  \item {primaryindex.h}, \hyperpage{41, 42}
+  \item {print}
+    \subitem {zip}, \hyperpage{32}
+  \item {printTable}
+    \subitem {primaryIndex}, \hyperpage{21}
+
+  \indexspace
+
+  \item {read}
+    \subitem {delimBuffer}, \hyperpage{7}
+    \subitem {LIBuffer}, \hyperpage{12}
+  \item {readCSV}
+    \subitem {primaryIndex}, \hyperpage{22}
+  \item {readIn}
+    \subitem {primaryIndex}, \hyperpage{24}
+  \item {readIndex}
+    \subitem {primaryIndex}, \hyperpage{25}
+  \item {recCount}
+    \subitem {primaryIndex}, \hyperpage{28}
+
+  \indexspace
+
+  \item {search}
+    \subitem {primaryIndex}, \hyperpage{25}
+  \item {setBuffer}
+    \subitem {delimBuffer}, \hyperpage{7}
+  \item {setCity}
+    \subitem {zip}, \hyperpage{32}
+  \item {setCounty}
+    \subitem {zip}, \hyperpage{32}
+  \item {setLat}
+    \subitem {zip}, \hyperpage{32}
+  \item {setLon}
+    \subitem {zip}, \hyperpage{33}
+  \item {setNum}
+    \subitem {zip}, \hyperpage{33}
+  \item {setStateCode}
+    \subitem {zip}, \hyperpage{33}
+  \item {size}
+    \subitem {delimBuffer}, \hyperpage{9}
+    \subitem {LIBuffer}, \hyperpage{14}
+  \item {stateChooser}
+    \subitem {primaryIndex}, \hyperpage{26}
+  \item {stateCode}
+    \subitem {zip}, \hyperpage{34}
+
+  \indexspace
+
+  \item {transfer}
+    \subitem {primaryIndex}, \hyperpage{26}
+
+  \indexspace
+
+  \item {unpack}
+    \subitem {delimBuffer}, \hyperpage{7}
+    \subitem {LIBuffer}, \hyperpage{13}
+
+  \indexspace
+
+  \item {write}
+    \subitem {LIBuffer}, \hyperpage{13}
+  \item {writeToFile}
+    \subitem {primaryIndex}, \hyperpage{27}
+
+  \indexspace
+
+  \item {zip}, \hyperpage{28}
+    \subitem {city}, \hyperpage{34}
+    \subitem {county}, \hyperpage{34}
+    \subitem {getCity}, \hyperpage{31}
+    \subitem {getCounty}, \hyperpage{31}
+    \subitem {getLat}, \hyperpage{31}
+    \subitem {getLon}, \hyperpage{31}
+    \subitem {getNum}, \hyperpage{31}
+    \subitem {getStateCode}, \hyperpage{31}
+    \subitem {indexElement}, \hyperpage{10}
+    \subitem {lat}, \hyperpage{34}
+    \subitem {lon}, \hyperpage{34}
+    \subitem {num}, \hyperpage{34}
+    \subitem {print}, \hyperpage{32}
+    \subitem {setCity}, \hyperpage{32}
+    \subitem {setCounty}, \hyperpage{32}
+    \subitem {setLat}, \hyperpage{32}
+    \subitem {setLon}, \hyperpage{33}
+    \subitem {setNum}, \hyperpage{33}
+    \subitem {setStateCode}, \hyperpage{33}
+    \subitem {stateCode}, \hyperpage{34}
+    \subitem {zip}, \hyperpage{30}
+  \item {zip.cpp}, \hyperpage{43}
+  \item {zip.h}, \hyperpage{44, 45}
+
+\end{theindex}
